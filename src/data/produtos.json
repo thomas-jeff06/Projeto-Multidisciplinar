@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Hambúrguer",
+        "price": 15,
+        "available": true,
+        "storeId": 1
+    },
+    {
+        "id": 2,
+        "name": "Batata",
+        "price": 10,
+        "available": true,
+        "storeId": 1
+    },
+    {
+        "id": 3,
+        "name": "Refrigerante",
+        "price": 8,
+        "available": true,
+        "storeId": 1
+    },
+    {
+        "id": 4,
+        "name": "Pizza",
+        "price": 20,
+        "available": true,
+        "storeId": 2
+    },
+    {
+        "id": 5,
+        "name": "Salada",
+        "price": 12,
+        "available": true,
+        "storeId": 2
+    },
+    {
+        "id": 6,
+        "name": "Suco",
+        "price": 6,
+        "available": true,
+        "storeId": 2
+    }
+]

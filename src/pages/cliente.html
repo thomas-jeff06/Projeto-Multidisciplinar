@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete App - Cliente</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🍔 Lanchonete</h1>
+        <div class="header-info">
+            <select id="unidadeSelect" onchange="mudarUnidade()">
+                <option value="Lanchonete A">Lanchonete A</option>
+                <option value="Lanchonete B">Lanchonete B</option>
+            </select>
+            <p>Pontos: <span id="pontos">0</span></p>
+            <button onclick="sair()">Sair</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="welcome-section">
+            <h2 id="welcomeMessage">Bem-vindo Cliente</h2>
+            <p>Selecione uma lanchonete e comece a fazer seu pedido!</p>
+        </section>
+
+        <!-- CARDÁPIO -->
+        <section id="cardapio">
+            <h2>Cardápio</h2>
+            <div id="produtos" class="produtos-grid"></div>
+        </section>
+
+        <!-- CARRINHO -->
+        <section id="carrinho">
+            <h2>Carrinho</h2>
+            <ul id="listaCarrinho"></ul>
+            <p>Total: R$ <span id="total">0</span></p>
+            <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        </section>
+
+        <!-- PAGAMENTO -->
+        <section id="pagamento" class="hidden">
+            <h2>Pagamento</h2>
+            <button onclick="pagar()">Pagar</button>
+            <p id="statusPagamento"></p>
+        </section>
+
+        <!-- STATUS -->
+        <section id="status" class="hidden">
+            <h2>Status do Pedido</h2>
+            <p id="statusPedido">Aguardando...</p>
+        </section>
+
+    </main>
+
+    <script src="../js/services/dataService.js"></script>
+    <script src="../js/utils/storage.js"></script>
+    <script src="../js/auth/auth.js"></script>
+    <script src="../js/pages/cliente.js"></script>
+</body>
+
+</html>

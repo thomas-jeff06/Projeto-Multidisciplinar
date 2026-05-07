@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "username": "admin",
+        "email": "admin@lanchonete.com",
+        "password": "123",
+        "type": "admin"
+    },
+    {
+        "id": 2,
+        "username": "cliente1",
+        "email": "cliente1@lanchonete.com",
+        "password": "pass",
+        "type": "cliente"
+    },
+    {
+        "id": 3,
+        "username": "cliente2",
+        "email": "cliente2@lanchonete.com",
+        "password": "pass",
+        "type": "cliente"
+    },
+    {
+        "id": 4,
+        "username": "cozinheiro1",
+        "email": "cozinheiro1@lanchonete.com",
+        "password": "pass",
+        "type": "cozinheiro"
+    },
+    {
+        "id": 5,
+        "username": "atendente1",
+        "email": "atendente1@lanchonete.com",
+        "password": "pass",
+        "type": "atendente"
+    }
+]

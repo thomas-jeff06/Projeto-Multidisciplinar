@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete App - Cozinheiro</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🍔 Lanchonete - Cozinha</h1>
+        <div class="header-info">
+            <button onclick="sair()">Sair</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="welcome-section">
+            <h2 id="welcomeMessage">Bem-vindo Cozinheiro</h2>
+            <p>Gerencie os pedidos em preparação.</p>
+        </section>
+
+        <section class="dashboard">
+            <div class="menu-item">
+                <h3>📝 Pedidos Pendentes</h3>
+                <p>Visualize os pedidos que precisam ser preparados.</p>
+            </div>
+            <div class="menu-item">
+                <h3>⏳ Em Preparação</h3>
+                <p>Pedidos que estão sendo preparados no momento.</p>
+            </div>
+            <div class="menu-item">
+                <h3>✅ Pronto</h3>
+                <p>Pedidos que estão prontos para retirada.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/services/dataService.js"></script>
+    <script src="../js/utils/storage.js"></script>
+    <script src="../js/auth/auth.js"></script>
+    <script src="../js/pages/cozinheiro.js"></script>
+</body>
+
+</html>

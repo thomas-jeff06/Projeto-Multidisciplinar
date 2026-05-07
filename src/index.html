@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete App - Login</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <section id="login" class="login-section">
+        <h1>🍔 Lanchonete App</h1>
+        <h2>Login</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="username" placeholder="Usuário" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+        <p id="mensagemErro" class="erro"></p>
+    </section>
+
+    <!-- LGPD -->
+    <div id="lgpd" class="lgpd hidden">
+        <p>Usamos seus dados para melhorar sua experiência.</p>
+        <button onclick="handleLGPD()">Aceitar</button>
+    </div>
+
+    <script src="js/services/dataService.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/auth/auth.js"></script>
+    <script src="js/auth/login.js"></script>
+</body>
+
+</html>

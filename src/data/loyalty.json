@@ -1,0 +1,27 @@
+[
+    {
+        "userId": 1,
+        "pontos": 0,
+        "nivel": "bronze"
+    },
+    {
+        "userId": 2,
+        "pontos": 0,
+        "nivel": "bronze"
+    },
+    {
+        "userId": 3,
+        "pontos": 0,
+        "nivel": "bronze"
+    },
+    {
+        "userId": 4,
+        "pontos": 0,
+        "nivel": "bronze"
+    },
+    {
+        "userId": 5,
+        "pontos": 0,
+        "nivel": "bronze"
+    }
+]
