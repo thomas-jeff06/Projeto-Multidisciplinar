@@ -1,1 +1,102 @@
-[]
+[
+    {
+        "id": 1,
+        "userId": 2,
+        "storeId": 1,
+        "itens": [
+            {
+                "id": 1,
+                "quantity": 2
+            },
+            {
+                "id": 2,
+                "quantity": 1
+            }
+        ],
+        "total": 40,
+        "status": "pendente",
+        "data": "2023-10-01T10:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "userId": 3,
+        "storeId": 1,
+        "itens": [
+            {
+                "id": 1,
+                "quantity": 1
+            },
+            {
+                "id": 3,
+                "quantity": 1
+            }
+        ],
+        "total": 23,
+        "status": "preparando",
+        "data": "2023-10-01T10:15:00.000Z"
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "storeId": 2,
+        "itens": [
+            {
+                "id": 4,
+                "quantity": 1
+            }
+        ],
+        "total": 20,
+        "status": "pronto",
+        "data": "2023-10-01T09:30:00.000Z"
+    },
+    {
+        "id": 4,
+        "userId": 3,
+        "storeId": 1,
+        "itens": [
+            {
+                "id": 2,
+                "quantity": 2
+            },
+            {
+                "id": 3,
+                "quantity": 2
+            }
+        ],
+        "total": 36,
+        "status": "pendente",
+        "data": "2023-10-01T11:00:00.000Z"
+    },
+    {
+        "id": 5,
+        "userId": 2,
+        "storeId": 1,
+        "itens": [
+            {
+                "id": 1,
+                "quantity": 3
+            }
+        ],
+        "total": 45,
+        "status": "preparando",
+        "data": "2023-10-01T10:45:00.000Z"
+    },
+    {
+        "id": 6,
+        "userId": 3,
+        "storeId": 2,
+        "itens": [
+            {
+                "id": 4,
+                "quantity": 2
+            },
+            {
+                "id": 5,
+                "quantity": 1
+            }
+        ],
+        "total": 50,
+        "status": "pronto",
+        "data": "2023-10-01T09:00:00.000Z"
+    }
+]

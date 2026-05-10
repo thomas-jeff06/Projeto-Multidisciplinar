@@ -38,3 +38,49 @@ function redirecionarPorTipo(tipo) {
     const rota = rotas[tipo] || 'pages/cliente.html';
     window.location.href = rota;
 }
+
+function usuarioJaExiste(username, email) {
+    return users.some(u => u.username === username || u.email === email);
+}
+
+function registrarNovoCliente(username, email, password) {
+    // Validar se usuário ou email já existem
+    if (usuarioJaExiste(username, email)) {
+        return {
+            sucesso: false,
+            mensagem: 'Usuário ou email já cadastrado!'
+        };
+    }
+
+    // Criar novo usuário
+    const novoId = Math.max(...users.map(u => u.id), 0) + 1;
+    const novoUsuario = {
+        id: novoId,
+        username: username,
+        email: email,
+        password: password,
+        type: 'cliente'
+    };
+
+    // Adicionar à array de usuários
+    users.push(novoUsuario);
+
+    // Salvar no localStorage como usuário atual
+    salvarUsuario(novoUsuario);
+
+    // Tentar salvar no JSON (simulado via localStorage)
+    salvarUsuariosNoStorage(users);
+
+    return {
+        sucesso: true,
+        user: novoUsuario,
+        mensagem: 'Cadastro realizado com sucesso!'
+    };
+}
+
+function salvarUsuariosNoStorage(usuariosArray) {
+    // Como estamos em um ambiente front-end puro, vamos salvar em localStorage
+    // Em um ambiente real, isso seria enviado para uma API backend
+    localStorage.setItem('usuarios_backup', JSON.stringify(usuariosArray));
+    console.log('Usuários salvos em localStorage');
+}

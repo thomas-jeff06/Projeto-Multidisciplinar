@@ -7,8 +7,9 @@ let carrinho = [];
 let pontos = 0;
 let produtos = [];
 let currentUser = null;
+let selectedStore = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     currentUser = obterUsuario();
 
     if (!currentUser || currentUser.type !== 'cliente') {
@@ -17,12 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Carregar dados
-    carregarDados();
+    await carregarDados();
 
     // Atualizar interface
     atualizarBemVindo();
     carregarPontos();
-    mudarUnidade();
+    mostrarUnidades();
 });
 
 function atualizarBemVindo() {
@@ -39,19 +40,71 @@ function carregarPontos() {
     document.getElementById("pontos").textContent = pontos;
 }
 
-function mudarUnidade() {
-    const select = document.getElementById("unidadeSelect");
-    const storeName = select.value;
-    const store = stores.find(s => s.name === storeName);
-    if (store) {
-        produtos = obterProdutosPorLoja(store.id);
+function mostrarUnidades() {
+    const container = document.getElementById("unidades");
+    container.innerHTML = "";
+
+    stores.forEach(store => {
+        const card = document.createElement("div");
+        card.className = "store-card";
+        card.innerHTML = `
+            <h3>${store.name}</h3>
+            <p>${store.description || 'Veja o cardápio desta lanchonete'}</p>
+        `;
+        card.addEventListener('click', () => selecionarUnidade(store.id, card));
+        container.appendChild(card);
+    });
+}
+
+function selecionarUnidade(storeId, cardElement) {
+    selectedStore = stores.find(s => s.id === storeId);
+    if (!selectedStore) return;
+
+    document.querySelectorAll('.store-card').forEach(card => card.classList.remove('selected'));
+    if (cardElement) cardElement.classList.add('selected');
+
+    const welcomeEl = document.getElementById('welcomeMessage');
+    if (welcomeEl) {
+        welcomeEl.textContent = `Bem-vindo ${currentUser.username}! Cardápio da ${selectedStore.name}`;
     }
+
+    document.getElementById('unidades').classList.add('hidden');
+    document.getElementById('cardapio').classList.remove('hidden');
+    document.getElementById('voltarUnidades').classList.remove('hidden');
+    produtos = obterProdutosPorLoja(selectedStore.id);
     carregarProdutos();
+}
+
+function voltarParaUnidades() {
+    selectedStore = null;
+    document.getElementById('unidades').classList.remove('hidden');
+    document.getElementById('cardapio').classList.add('hidden');
+    document.getElementById('voltarUnidades').classList.add('hidden');
+    document.getElementById('produtos').innerHTML = '';
+    carrinho = [];
+    atualizarCarrinho();
+    document.getElementById('pagamento').classList.add('hidden');
+    document.getElementById('status').classList.add('hidden');
+
+    const welcomeEl = document.getElementById('welcomeMessage');
+    if (welcomeEl) {
+        welcomeEl.textContent = `Bem-vindo ${currentUser.type.charAt(0).toUpperCase() + currentUser.type.slice(1)}`;
+    }
 }
 
 function carregarProdutos() {
     const div = document.getElementById("produtos");
     div.innerHTML = "";
+
+    if (!selectedStore) {
+        div.innerHTML = '<p>Escolha uma lanchonete para ver os produtos.</p>';
+        return;
+    }
+
+    if (produtos.length === 0) {
+        div.innerHTML = '<p>Nenhum produto disponível nesta lanchonete.</p>';
+        return;
+    }
 
     produtos.forEach((p, index) => {
         const item = document.createElement("div");
@@ -108,6 +161,11 @@ function finalizarPedido() {
 }
 
 function pagar() {
+    if (!selectedStore) {
+        alert("Selecione uma lanchonete antes de pagar.");
+        return;
+    }
+
     const status = document.getElementById("statusPagamento");
     status.textContent = "Processando...";
 
@@ -116,10 +174,9 @@ function pagar() {
 
         if (sucesso) {
             status.textContent = "Pagamento aprovado!";
-            const store = stores.find(s => s.name === document.getElementById("unidadeSelect").value);
             criarPedido(
                 currentUser.id,
-                store.id,
+                selectedStore.id,
                 carrinho.map(p => ({ id: p.id, name: p.name, price: p.price })),
                 parseFloat(document.getElementById("total").textContent)
             );

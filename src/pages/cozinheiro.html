@@ -20,21 +20,28 @@
     <main class="container">
         <section class="welcome-section">
             <h2 id="welcomeMessage">Bem-vindo Cozinheiro</h2>
-            <p>Gerencie os pedidos em preparação.</p>
+            <p>Gerencie todos os pedidos da sua lanchonete.</p>
         </section>
 
-        <section class="dashboard">
-            <div class="menu-item">
-                <h3>📝 Pedidos Pendentes</h3>
-                <p>Visualize os pedidos que precisam ser preparados.</p>
-            </div>
-            <div class="menu-item">
-                <h3>⏳ Em Preparação</h3>
-                <p>Pedidos que estão sendo preparados no momento.</p>
-            </div>
-            <div class="menu-item">
-                <h3>✅ Pronto</h3>
-                <p>Pedidos que estão prontos para retirada.</p>
+        <!-- Seção de Pedidos em Tabela -->
+        <section id="pedidos-section" class="cozinheiro-section">
+            <h2>📋 Pedidos da Lanchonete</h2>
+            <div class="tabela-container">
+                <table class="pedidos-tabela">
+                    <thead>
+                        <tr>
+                            <th>ID Pedido</th>
+                            <th>Cliente</th>
+                            <th>Itens</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pedidos-tbody">
+                        <!-- Pedidos serão inseridos aqui dinamicamente -->
+                    </tbody>
+                </table>
             </div>
         </section>
 

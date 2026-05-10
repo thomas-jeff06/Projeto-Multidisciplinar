@@ -20,6 +20,23 @@
             <button type="submit">Entrar</button>
         </form>
         <p id="mensagemErro" class="erro"></p>
+        <button type="button" onclick="irParaCadastro()" style="margin-top: 15px;">Criar Conta</button>
+    </section>
+
+    <!-- CADASTRO -->
+    <section id="cadastro" class="cadastro-section hidden">
+        <h1>🍔 Lanchonete App</h1>
+        <h2>Criar Conta</h2>
+        <form onsubmit="handleCadastro(event)">
+            <input type="text" id="cadastroUsername" placeholder="Nome de Usuário" required>
+            <input type="email" id="cadastroEmail" placeholder="Email" required>
+            <input type="password" id="cadastroPassword" placeholder="Senha" required>
+            <input type="password" id="cadastroConfirmPassword" placeholder="Confirmar Senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p id="mensagemCadastroErro" class="erro"></p>
+        <p id="mensagemCadastroSucesso" class="sucesso"></p>
+        <button type="button" onclick="voltarParaLogin()" style="margin-top: 15px; background: #999;">Voltar</button>
     </section>
 
     <!-- LGPD -->

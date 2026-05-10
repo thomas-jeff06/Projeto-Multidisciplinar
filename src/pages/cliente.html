@@ -13,10 +13,6 @@
     <header>
         <h1>🍔 Lanchonete</h1>
         <div class="header-info">
-            <select id="unidadeSelect" onchange="mudarUnidade()">
-                <option value="Lanchonete A">Lanchonete A</option>
-                <option value="Lanchonete B">Lanchonete B</option>
-            </select>
             <p>Pontos: <span id="pontos">0</span></p>
             <button onclick="sair()">Sair</button>
         </div>
@@ -25,12 +21,18 @@
     <main class="container">
         <section class="welcome-section">
             <h2 id="welcomeMessage">Bem-vindo Cliente</h2>
-            <p>Selecione uma lanchonete e comece a fazer seu pedido!</p>
+            <p>Escolha uma lanchonete abaixo para ver o cardápio.</p>
         </section>
 
-        <!-- CARDÁPIO -->
-        <section id="cardapio">
-            <h2>Cardápio</h2>
+        <section id="unidades" class="unidades-grid"></section>
+
+        <!-- LANCHONETES -->
+        <section id="cardapio" class="hidden">
+            <div class="section-header">
+                <h2>Cardápio</h2>
+                <button id="voltarUnidades" class="secondary-button hidden" onclick="voltarParaUnidades()">Escolher
+                    outra lanchonete</button>
+            </div>
             <div id="produtos" class="produtos-grid"></div>
         </section>
 

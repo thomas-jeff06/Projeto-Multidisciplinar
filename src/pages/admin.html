@@ -23,27 +23,171 @@
             <p>Acesse as ferramentas de administração do sistema.</p>
         </section>
 
-        <section class="dashboard">
-            <div class="menu-item">
-                <h3>📊 Dashboard</h3>
-                <p>Visualize relatórios e estatísticas gerais.</p>
+        <!-- Menu de navegação -->
+        <div class="admin-menu">
+            <button class="admin-menu-btn active" onclick="mostrarDashboard()">📊 Dashboard</button>
+            <button class="admin-menu-btn" onclick="mostrarUsuarios()">👥 Gerenciar Usuários</button>
+            <button class="admin-menu-btn" onclick="mostrarLojas()">🏪 Gerenciar Lojas</button>
+            <button class="admin-menu-btn" onclick="mostrarProdutos()">🛒 Gerenciar Produtos</button>
+            <button class="admin-menu-btn" onclick="mostrarPedidos()">📦 Pedidos</button>
+            <button class="admin-menu-btn" onclick="resetarDadosSistema()">🔄 Resetar Dados</button>
+        </div>
+
+        <!-- Seção Dashboard -->
+        <section id="dashboard-section" class="admin-section active">
+            <h2>📊 Dashboard</h2>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3 id="totalUsuarios">0</h3>
+                    <p>Usuários Cadastrados</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalLojas">0</h3>
+                    <p>Lojas Ativas</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalProdutos">0</h3>
+                    <p>Produtos Disponíveis</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalPedidos">0</h3>
+                    <p>Pedidos Realizados</p>
+                </div>
             </div>
-            <div class="menu-item">
-                <h3>👥 Gerenciar Usuários</h3>
-                <p>Crie, edite e gerencie usuários do sistema.</p>
+
+            <div class="dashboard-charts">
+                <div class="chart-container">
+                    <h3>Usuários por Tipo</h3>
+                    <div id="usuariosPorTipo"></div>
+                </div>
+                <div class="chart-container">
+                    <h3>Status dos Pedidos</h3>
+                    <div id="pedidosPorStatus"></div>
+                </div>
             </div>
-            <div class="menu-item">
-                <h3>🏪 Gerenciar Lojas</h3>
-                <p>Administre as unidades de lanchonete.</p>
+        </section>
+
+        <!-- Seção Gerenciar Usuários -->
+        <section id="usuarios-section" class="admin-section hidden">
+            <h2>👥 Gerenciar Usuários</h2>
+            <div class="user-actions">
+                <input id="usuarioSearch" type="search" placeholder="Buscar por usuário, email ou tipo"
+                    oninput="filtrarUsuarios()">
+                <button type="button" onclick="abrirNovoUsuario()">+ Novo Usuário</button>
             </div>
-            <div class="menu-item">
-                <h3>🍔 Gerenciar Produtos</h3>
-                <p>Crie, edite e gerencie produtos do cardápio.</p>
+            <div class="user-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuário</th>
+                            <th>Email</th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usuariosTable"></tbody>
+                </table>
             </div>
-            <div class="menu-item">
-                <h3>📦 Pedidos</h3>
-                <p>Visualize e gerencie todos os pedidos.</p>
+            <div id="usuarioForm" class="user-form hidden">
+                <h3 id="usuarioFormTitle">Editar Usuário</h3>
+                <form onsubmit="salvarUsuarioEdicao(event)">
+                    <input type="hidden" id="usuarioId">
+                    <input type="text" id="usuarioUsername" placeholder="Nome de Usuário" required>
+                    <input type="email" id="usuarioEmail" placeholder="Email" required>
+                    <select id="usuarioTipo" required>
+                        <option value="cliente">Cliente</option>
+                        <option value="admin">Admin</option>
+                        <option value="cozinheiro">Cozinheiro</option>
+                        <option value="atendente">Atendente</option>
+                    </select>
+                    <input type="password" id="usuarioPassword" placeholder="Senha (deixe em branco para manter)"
+                        autocomplete="new-password">
+                    <div class="user-form-actions">
+                        <button type="submit">Salvar</button>
+                        <button type="button" class="secondary-button" onclick="fecharFormUsuario()">Cancelar</button>
+                    </div>
+                </form>
             </div>
+            <p id="usuarioMensagem" class="erro"></p>
+        </section>
+
+        <!-- Seção Gerenciar Lojas -->
+        <section id="lojas-section" class="admin-section hidden">
+            <h2>🏪 Gerenciar Lojas</h2>
+            <div class="user-actions">
+                <input id="lojaSearch" type="search" placeholder="Buscar por nome da loja" oninput="filtrarLojas()">
+                <button type="button" onclick="abrirNovaLoja()">+ Nova Loja</button>
+            </div>
+            <div class="user-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Produtos</th>
+                            <th>Funcionários</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lojasTable"></tbody>
+                </table>
+            </div>
+            <div id="lojaForm" class="user-form hidden">
+                <h3 id="lojaFormTitle">Editar Loja</h3>
+                <form onsubmit="salvarLojaEdicao(event)">
+                    <input type="hidden" id="lojaId">
+                    <input type="text" id="lojaNome" placeholder="Nome da Loja" required>
+                    <div class="user-form-actions">
+                        <button type="submit">Salvar</button>
+                        <button type="button" class="secondary-button" onclick="fecharFormLoja()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <p id="lojaMensagem" class="erro"></p>
+        </section>
+
+        <!-- Seção Gerenciar Produtos -->
+        <section id="produtos-section" class="admin-section hidden">
+            <h2>🛒 Gerenciar Produtos</h2>
+            <div class="user-actions">
+                <select id="produtosLojaSelect" onchange="filtrarProdutosPorLoja()"></select>
+                <button type="button" onclick="abrirNovoProduto()">+ Novo Produto</button>
+            </div>
+            <div class="user-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Disponível</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="produtosTable"></tbody>
+                </table>
+            </div>
+            <div id="produtoForm" class="user-form hidden">
+                <h3 id="produtoFormTitle">Editar Produto</h3>
+                <form onsubmit="salvarProdutoEdicao(event)">
+                    <input type="hidden" id="produtoId">
+                    <input type="text" id="produtoNome" placeholder="Nome do Produto" required>
+                    <input type="number" id="produtoPreco" placeholder="Preço" step="0.01" min="0" required>
+                    <label class="checkbox-label"><input type="checkbox" id="produtoDisponivel"> Disponível</label>
+                    <div class="user-form-actions">
+                        <button type="submit">Salvar</button>
+                        <button type="button" class="secondary-button" onclick="fecharFormProduto()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+            <p id="produtoMensagem" class="erro"></p>
+        </section>
+
+        <!-- Seção Pedidos -->
+        <section id="pedidos-section" class="admin-section hidden">
+            <h2>📦 Pedidos</h2>
+            <p>Funcionalidade em desenvolvimento...</p>
         </section>
 
     </main>
