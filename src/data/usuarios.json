@@ -30,10 +30,26 @@
     },
     {
         "id": 5,
+        "username": "cozinheiro2",
+        "email": "cozinheiro2@lanchonete.com",
+        "password": "pass",
+        "type": "cozinheiro",
+        "storeId": 2
+    },
+    {
+        "id": 6,
         "username": "atendente1",
         "email": "atendente1@lanchonete.com",
         "password": "pass",
         "type": "atendente",
         "storeId": 1
+    },
+    {
+        "id": 7,
+        "username": "atendente2",
+        "email": "atendente2@lanchonete.com",
+        "password": "pass",
+        "type": "atendente",
+        "storeId": 2
     }
 ]

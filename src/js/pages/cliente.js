@@ -130,14 +130,32 @@ function atualizarCarrinho() {
     lista.innerHTML = "";
     let total = 0;
 
-    carrinho.forEach(item => {
+    if (carrinho.length === 0) {
         const li = document.createElement("li");
-        li.textContent = item.name;
+        li.textContent = 'Carrinho vazio';
+        lista.appendChild(li);
+        totalSpan.textContent = '0.00';
+        return;
+    }
+
+    carrinho.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = 'cart-item';
+        li.innerHTML = `
+            <span>${item.name} - R$ ${item.price.toFixed(2)}</span>
+            <button type="button" class="btn-remove" onclick="removerDoCarrinho(${index})">Remover</button>
+        `;
         lista.appendChild(li);
         total += item.price;
     });
 
-    totalSpan.textContent = total;
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function removerDoCarrinho(index) {
+    if (index < 0 || index >= carrinho.length) return;
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
 }
 
 function finalizarPedido() {

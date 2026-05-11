@@ -23,21 +23,64 @@
             <p>Gerencie o atendimento e pedidos dos clientes.</p>
         </section>
 
-        <section class="dashboard">
-            <div class="menu-item">
-                <h3>🛒 Novo Pedido</h3>
-                <p>Crie um novo pedido para cliente.</p>
+        <nav class="atendente-tabs">
+            <button id="tabNovoPedido" class="tab active" type="button">🛒 Novo Pedido</button>
+            <button id="tabPedidosAtivos" class="tab" type="button">📋 Pedidos Ativos</button>
+            <button id="tabRetirada" class="tab" type="button">🏁 Retirada</button>
+        </nav>
+
+        <section id="novoPedidoSection" class="page-section">
+            <div class="section-header">
+                <h3>Realizar Pedido</h3>
             </div>
-            <div class="menu-item">
-                <h3>📋 Pedidos Ativo</h3>
-                <p>Visualize os pedidos em andamento.</p>
-            </div>
-            <div class="menu-item">
-                <h3>🏁 Retirada</h3>
-                <p>Gerenciar retirada de pedidos prontos.</p>
+
+            <p>O pedido será criado como anônimo e associado ao atendente atual.</p>
+
+            <div id="produtos" class="produtos-grid"></div>
+
+            <div class="cart-panel">
+                <h4>Carrinho</h4>
+                <ul id="listaCarrinho"></ul>
+                <p>Total: R$ <span id="total">0.00</span></p>
+                <button id="finalizarPedidoBtn" type="button" onclick="finalizarPedido()">Finalizar Pedido</button>
             </div>
         </section>
 
+        <section id="pedidosAtivosSection" class="page-section hidden">
+            <div class="section-header">
+                <h3>Pedidos Ativos</h3>
+            </div>
+            <table class="pedidos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Itens</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="pedidos-ativos-tbody"></tbody>
+            </table>
+        </section>
+
+        <section id="retiradaSection" class="page-section hidden">
+            <div class="section-header">
+                <h3>Retirada</h3>
+            </div>
+            <table class="pedidos-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Itens</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="pedidos-retirada-tbody"></tbody>
+            </table>
+        </section>
     </main>
 
     <script src="../js/services/dataService.js"></script>

@@ -61,6 +61,8 @@ function mostrarProdutos() {
 function mostrarPedidos() {
     mostrarSecao('pedidos-section');
     marcarBotaoAtivo(4);
+    carregarSelecaoLojasPedidos();
+    renderizarPedidosAdmin();
 }
 
 function mostrarSecao(secaoId) {
@@ -373,6 +375,55 @@ function carregarSelecaoLojasProdutos() {
     if (!select.value && stores.length > 0) {
         select.value = stores[0].id;
     }
+}
+
+function carregarSelecaoLojasPedidos() {
+    const select = document.getElementById('pedidosLojaSelect');
+    if (!select) return;
+
+    select.innerHTML = `<option value="0">Todas as lanchonetes</option>` + stores.map(loja => `<option value="${loja.id}">${loja.name}</option>`).join('');
+    if (!select.value) {
+        select.value = '0';
+    }
+}
+
+function filtrarPedidosPorLoja() {
+    renderizarPedidosAdmin();
+}
+
+async function renderizarPedidosAdmin() {
+    await aguardarDadosCarregados();
+    const select = document.getElementById('pedidosLojaSelect');
+    const lojaId = Number(select?.value || 0);
+    const tbody = document.getElementById('pedidosTable');
+    if (!tbody) return;
+
+    const pedidosFiltrados = orders.filter(order => lojaId === 0 || order.storeId === lojaId);
+    if (pedidosFiltrados.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 20px;">Nenhum pedido encontrado.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = pedidosFiltrados.map(order => {
+        const usuario = obterUsuarioPorId(order.userId);
+        const nomeUsuario = usuario ? usuario.username : `Usuário ${order.userId}`;
+        const loja = obterLojaPorId(order.storeId);
+        const nomeLoja = loja ? loja.name : `Loja ${order.storeId}`;
+        const itensTexto = order.itens.map(item => {
+            const produto = obterProdutoPorId(item.id);
+            const nome = produto ? produto.name : `Produto ${item.id}`;
+            return `${item.quantity}x ${nome}`;
+        }).join(', ');
+        return `
+            <tr>
+                <td>${order.id}</td>
+                <td>${nomeUsuario}</td>
+                <td>${nomeLoja}</td>
+                <td>${itensTexto}</td>
+                <td>R$ ${order.total.toFixed(2)}</td>
+                <td>${order.status.charAt(0).toUpperCase() + order.status.slice(1)}</td>
+            </tr>`;
+    }).join('');
 }
 
 async function renderizarProdutos() {

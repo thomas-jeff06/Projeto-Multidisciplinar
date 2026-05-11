@@ -187,7 +187,24 @@
         <!-- Seção Pedidos -->
         <section id="pedidos-section" class="admin-section hidden">
             <h2>📦 Pedidos</h2>
-            <p>Funcionalidade em desenvolvimento...</p>
+            <div class="user-actions">
+                <select id="pedidosLojaSelect" onchange="filtrarPedidosPorLoja()"></select>
+            </div>
+            <div class="user-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Lanchonete</th>
+                            <th>Itens</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pedidosTable"></tbody>
+                </table>
+            </div>
         </section>
 
     </main>
